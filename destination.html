@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./styles/helpers.css"/>
+        <link rel="stylesheet" href="./styles/reset.css"/>
+        <link rel="stylesheet" href="./styles/style.css"/>
+        <script src="./scripts/mobile-menu.js" defer></script>
+        <script src="./scripts/navigation-links.js" defer></script>
+        <script src="./scripts/destination-links.js" defer></script>
+        <title>Home - Space travel website</title>
+    </head>
+    <body class="destination-body">
+        <header>
+            <a href="index.html">
+                <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                    <g fill="none" fill-rule="evenodd">
+                        <circle cx="24" cy="24" r="24" fill="#FFF"/>
+                        <path fill="#0B0D17" d="M24 0c0 16-8 24-24 24 15.718.114 23.718 8.114 24 24 0-16 8-24 24-24-16 0-24-8-24-24z"/>
+                    </g>
+                </svg>
+            </a>
+            <nav class="navigation">
+                <ul class="nav_list">
+                    <li class="nav_item">
+                        <a class="nav_link" href="index.html"><span class="nav_item-number" aria-hidden="true">00</span>Home</a>
+                    </li>
+                    <li class="nav_item">
+                        <a class="nav_link active-link" href="destination.html"><span class="nav_item-number" aria-hidden="true">01</span>Destination</a>
+                    </li>
+                    <li class="nav_item">
+                        <a class="nav_link" href="crew.html"><span class="nav_item-number" aria-hidden="true">02</span>Crew</a>
+                    </li>
+                    <li class="nav_item">
+                        <a class="nav_link" href="technology.html"><span class="nav_item-number" aria-hidden="true">03</span>Technology</a>
+                    </li>
+                    <li class="underline" tabindex="-1" aria-hidden="true"></li>
+                </ul>
+            </nav>
+            <button class="menu-btn" aria-label="Open the menu">
+                <svg viewBox="0 0 100 100">
+                  <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+                  <path class="line line2" d="M 20,50 H 80" />
+                  <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+                </svg>
+            </button>
+        </header>
+        <main>
+            <h1 class="h1-secondary">
+                <span aria-hidden="true">01</span>
+                <span>Pick your destination</span>
+            </h1>
+            <div class="destination-img"></div>
+            <ul class="destination_list">
+                <li class="destination_item">
+                    <a class="destination_link destination-active" href="#moon">Moon</a>
+                </li>
+                <li class="destination_item">
+                    <a class="destination_link" href="#mars">Mars</a>
+                </li>
+                <li class="destination_item">
+                    <a class="destination_link" href="#europa">Europa</a>
+                </li>
+                <li class="destination_item">
+                    <a class="destination_link" href="#titan">Titan</a>
+                </li>
+                <li class="destination-underline" tabindex="-1" aria-hidden="true"></li>
+            </ul>
+            <section class="destination-section">
+                <div class="destination-choice">
+                    <div>
+                        <h2 class="h2-destination">Moon</h2>
+                        <p>See our planet as you’ve never seen it before. A perfect relaxing trip away to help regain perspective and come back refreshed. While you’re there, take in some history by visiting the Luna 2 and Apollo 11 landing sites.</p>    
+                    </div>
+                    <hr>
+                    <div class="destination-info-container">
+                        <div class="destination-info">
+                            <h3>Avg. distance</h3>
+                            <p>384,400 KM</p>
+                        </div>
+                        <div class="destination-info">
+                            <h3>Est. travel time</h3>
+                            <p>3 days</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

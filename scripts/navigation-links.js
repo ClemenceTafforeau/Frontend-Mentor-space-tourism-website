@@ -13,6 +13,10 @@ navLinks.forEach(link => {
         moveUnderline(link);
     });
 
+    link.addEventListener('focus', function() {
+        moveUnderline(link);
+    });
+
     link.addEventListener('mouseout', function() {
         if (activeLink) {
           moveUnderline(activeLink);
