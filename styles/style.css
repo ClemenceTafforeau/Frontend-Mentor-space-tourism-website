@@ -1,0 +1,54 @@
+/* Fonts */
+
+/* bellefair-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Bellefair';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/bellefair-v14-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+  
+  /* barlow-condensed-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Barlow Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/barlow-condensed-v12-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+  
+/* Variables */
+
+:root {
+    --clr-neutral-dark: hsla(230, 35%, 23%, 1);
+    --clr-neutral-light: hsla(0, 0%, 100%, 1);
+    --clr-primary-1: hsla(231, 77%, 90%, 1);
+
+    --ff-title: 'Bellefair', serif;
+    --ff-body: 'Barlow Condensed', sans-serif;
+
+    --h1-fs: clamp(8rem, 6rem + 10vw, 15rem);
+    --h1-lh: clamp(10rem, 7.943rem + 10.286vw, 17.2rem);
+    --h2-fs: clamp(5.6rem, 4.343rem + 6.286vw, 10rem);
+    --h2-lh: clamp(6.4rem, 4.943rem + 7.286vw, 11.5rem);
+    --h3-fs: clamp(2.4rem, 1.486rem + 4.571vw, 5.6rem);
+    --h3-lh: clamp(2.8rem, 1.771rem + 5.143vw, 6.4rem);
+    --h4-fs: clamp(1.6rem, 1.143rem + 2.286vw, 3.2rem);
+    --h4-lh: clamp(1.8rem, 1.257rem + 2.714vw, 3.7rem);
+    --h5-fs: clamp(1.6rem, 1.257rem + 1.714vw, 2.8rem);
+    --h5-lh: clamp(1.9rem, 1.471rem + 2.143vw, 3.4rem);
+    --h5-spacing: .472rem;
+    --subheading-1-fs: 2.8rem;
+    --subheading-1-lh: 3.2rem;
+    --subheading-2-fs: 1.4rem;
+    --subheading-2-lh: 1.7rem;
+    --subheading-2-spacing: .236rem;
+    --subheading-3-fs: 1.6rem;
+    --subheading-3-lh: 1.9rem;
+    --subheading-3-spacing: .27rem;
+    --body-fs: clamp(1.5rem, 1.414rem + 0.429vw, 1.8rem);
+    --body-lh: clamp(2.5rem, 2.3rem + 1vw, 3.2rem);
+
+    --spacing-x: clamp(1.6rem, -2.657rem + 13.304vw, 16.5rem);
+}
