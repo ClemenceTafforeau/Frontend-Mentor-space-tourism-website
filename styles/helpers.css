@@ -14,8 +14,8 @@ font-size: 1.6rem;
 
 /* Set text selection */
 ::selection {
-color: #000;
-background-color: #fd0;
+color: var(--clr-neutral-dark);
+background-color: var(--clr-primary-1);
 }
 
 /* Set cursor pointer */

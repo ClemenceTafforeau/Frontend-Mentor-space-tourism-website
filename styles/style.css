@@ -114,6 +114,11 @@ a {
     font-weight: 700;
 }
 
+.blurred-backdrop {
+    background-color: var(--clr-neutral-light-transparency-04);
+    backdrop-filter: blur(2rem);
+}
+
 /** Header **/
 
 header {
@@ -128,6 +133,8 @@ header {
     color: var(--clr-neutral-light);
     font-family: var(--ff-subtitles);
     z-index: 97;
+    background-color: transparent;
+    transition: all .6s ease-in-out;
 }
 
 .logo {
@@ -286,6 +293,9 @@ header {
     }
     .nav_item-number {
         display: inline-block;
+    }
+    header {
+        margin-block-start: 4rem;
     }
     header::after {
         content: '';
