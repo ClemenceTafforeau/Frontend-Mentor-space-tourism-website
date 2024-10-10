@@ -6,7 +6,7 @@
     font-family: 'Bellefair';
     font-style: normal;
     font-weight: 400;
-    src: url('/Frontend-Mentor-space-tourism-website/assets/fonts/bellefair-v14-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('@/assets/fonts/bellefair-v14-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
   
   /* barlow-condensed-regular - latin */
@@ -15,7 +15,7 @@
     font-family: 'Barlow Condensed';
     font-style: normal;
     font-weight: 400;
-    src: url('/Frontend-Mentor-space-tourism-website/assets/fonts/barlow-condensed-v12-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('@/assets/fonts/barlow-condensed-v12-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* barlow-regular - latin */
@@ -24,7 +24,7 @@
     font-family: 'Barlow';
     font-style: normal;
     font-weight: 400;
-    src: url('/Frontend-Mentor-space-tourism-website/assets/fonts/barlow-v12-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('@/assets/fonts/barlow-v12-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
   
   
@@ -88,7 +88,7 @@ main {
     position: relative;
 }
 
-a {
+a, button {
     color: inherit;
     text-decoration: none;
 }
@@ -117,6 +117,22 @@ a {
 .blurred-backdrop {
     background-color: var(--clr-neutral-light-transparency-04);
     backdrop-filter: blur(2rem);
+}
+
+/* Transition for fade effect */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+button {
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 
 /** Header **/
@@ -315,7 +331,7 @@ header {
 /** Home **/
 
 .home-body {
-    background-image: url(../assets/img/background-home-mobile.jpg);
+    background-image: url(@/assets/img/background-home-mobile.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -413,7 +429,7 @@ header {
 
 @media only screen and (min-width: 48em) {
     .home-body {
-        background-image: url(../assets/img/background-home-tablet.jpg);
+        background-image: url(@/assets/img/background-home-tablet.jpg);
     }
 }
 
@@ -421,7 +437,7 @@ header {
 
 @media only screen and (min-width: 80em) {
     .home-body {
-        background-image: url(../assets/img/background-home-desktop.jpg);
+        background-image: url(@/assets/img/background-home-desktop.jpg);
     }
 
     .home-body main {
@@ -440,7 +456,7 @@ header {
 /** Destination page **/
 
 .destination-body {
-    background-image: url(../assets/img/background-destination-mobile.jpg);
+    background-image: url(@/assets/img/background-destination-mobile.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -460,7 +476,7 @@ header {
 .destination-img {
     width: clamp(14rem, 27.2321vw + 5.2857rem, 44.5rem);
     height: clamp(14rem, 27.2321vw + 5.2857rem, 44.5rem);
-    background-image: url(../assets/img/image-moon.webp);
+    background-image: url(@/assets/img/image-moon.webp);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -468,15 +484,19 @@ header {
 .destination_list {
     display: flex;
     gap: 2.4rem;
+    padding-block-end: .8rem;
+    position: relative;
+    z-index: 1;
+}
+
+.destination_link {
     color: var(--clr-primary-1);
     text-transform: uppercase;
     font-family: var(--ff-subtitles);
     font-size: var(--subheading-3-fs);
     line-height: var(--subheading-3-lh);
     letter-spacing: var(--subheading-3-spacing);
-    padding-block-end: .8rem;
-    position: relative;
-    z-index: 1;
+    transition: all .6s ease-in-out;
 }
 
 .destination_link:hover, .destination_link:active, .destination_link:focus, .destination-active {
@@ -545,7 +565,7 @@ header {
 
 @media only screen and (min-width: 48em) {
     .destination-body {
-        background-image: url(../assets/img/background-destination-tablet.jpg);
+        background-image: url(@/assets/img/background-destination-tablet.jpg);
     }
     
     .destination-body main {
@@ -566,7 +586,7 @@ header {
 
 @media only screen and (min-width: 80em) {
     .destination-body {
-        background-image: url(../assets/img/background-destination-desktop.jpg);
+        background-image: url(@/assets/img/background-destination-desktop.jpg);
     }
     .destination-body main {
         display: grid;
@@ -602,7 +622,7 @@ header {
 /** Crew page **/
 
 .crew-body {
-    background-image: url(../assets/img/background-crew-mobile.jpg);
+    background-image: url(@/assets/img/background-crew-mobile.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -622,10 +642,13 @@ header {
 .crew-img {
     width: clamp(17.7rem, 40.7292vw + 4.6667rem, 56.8rem);
     height: clamp(22.2rem, 51.0417vw + 5.8667rem, 71.2rem);
-    background-image: url(../assets/img/image-douglas-hurley.webp);
-    background-size: cover;
-    background-repeat: no-repeat;
     margin-block-end: -3.2rem;
+    display: flex;
+    align-items: end;
+}
+
+.crew-img img {
+    max-height: clamp(22.2rem, 51.0417vw + 5.8667rem, 71.2rem);
 }
 
 .crew-body main hr {
@@ -693,7 +716,7 @@ header {
 
 @media only screen and (min-width: 48em) {
     .crew-body {
-        background-image: url(../assets/img/background-crew-tablet.jpg);
+        background-image: url(@/assets/img/background-crew-tablet.jpg);
         overflow-y: hidden;
     }
     
@@ -722,6 +745,7 @@ header {
 
     .crew-section {
         grid-row: 2 / 3;
+        min-height: 30rem;
     }
 }
 
@@ -729,7 +753,7 @@ header {
 
 @media only screen and (min-width: 80em) {
     .crew-body {
-        background-image: url(../assets/img/background-crew-desktop.jpg);
+        background-image: url(@/assets/img/background-crew-desktop.jpg);
     }
     .crew-body main {
         display: grid;
@@ -744,6 +768,8 @@ header {
         grid-row: 1 / 4;
         margin-block-end: 0;
         align-self: end;
+        display: flex;
+        align-items: end;
     }
     .crew-section {
         grid-row: 2 / 3;
@@ -759,7 +785,7 @@ header {
 /** Technology page **/
 
 .technology-body {
-    background-image: url(../assets/img/background-technology-mobile.jpg);
+    background-image: url(@/assets/img/background-technology-mobile.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -779,7 +805,7 @@ header {
 .technology-img {
     width: 100vw;
     height: clamp(17rem, 31.25vw + 7rem, 31rem);
-    background-image: url(../assets/img/image-launch-vehicle-landscape.jpg);
+    background-image: url(@/assets/img/image-launch-vehicle-landscape.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -850,7 +876,7 @@ header {
 
 @media only screen and (min-width: 48em) {
     .technology-body {
-        background-image: url(../assets/img/background-technology-tablet.jpg);
+        background-image: url(@/assets/img/background-technology-tablet.jpg);
     }
     .technology-body main {
         gap: 4.8rem;
@@ -869,7 +895,7 @@ header {
 
 @media only screen and (min-width: 80em) {
     .technology-body {
-        background-image: url(../assets/img/background-technology-desktop.jpg);
+        background-image: url(@/assets/img/background-technology-desktop.jpg);
     }
     .technology-body main {
         display: grid;
@@ -891,7 +917,7 @@ header {
         max-width: 51.5rem;
         justify-self: end;
         height: 52.7rem;
-        background-image: url(../assets/img/image-launch-vehicle-portrait.jpg);
+        background-image: url(@/assets/img/image-launch-vehicle-portrait.jpg);
         grid-column: 3 / 4;
         grid-row: 2 / 4;
         margin-inline-end: -16.5rem;
