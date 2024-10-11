@@ -16,7 +16,3 @@
         name: "HomeComponent",
     };
 </script>
-
-<style src="@/assets/styles/helpers.css"></style>
-<style src="@/assets/styles/reset.css"></style>
-<style src="@/assets/styles/style.css"></style>
