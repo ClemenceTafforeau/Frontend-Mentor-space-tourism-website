@@ -37,4 +37,11 @@ ehthumbs.db
 Thumbs.db
 
 # Node modules
-/node_modules
+/frontend/node_modules
+
+# Vendor
+/backend/vendor
+
+# Compiled Laravel files
+/backend/storage
+/backend/bootstrap/cache
