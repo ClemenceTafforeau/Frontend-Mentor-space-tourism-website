@@ -44,7 +44,7 @@ class DestinationSeeder extends Seeder
             'picture_png' => 'image-titan.png',
             'name' => 'Titan',
             'description' => 'The only moon known to have a dense atmosphere other than Earth, Titan is a home away from home (just a few hundred degrees colder!). As a bonus, you get striking views of the Rings of Saturn.',
-            'distance' => 16000000000,
+            'distance' => 1600000000,
             'ett' => 2555
         ]);
     }
