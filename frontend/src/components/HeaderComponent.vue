@@ -1,5 +1,5 @@
 <template>
-    <header ref="header">
+    <header ref="header" :class="authStore.isAuthenticated ? 'header-user' : 'header-general'">
         <a href="/" class="logo_link">
             <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true">
                 <g fill="none" fill-rule="evenodd">
@@ -8,7 +8,7 @@
                 </g>
             </svg>
         </a>
-        <nav ref="nav" class="navigation">
+        <nav v-if="!authStore.isAuthenticated" ref="nav" class="navigation">
             <ul class="nav_list">
                 <li class="nav_item">
                     <router-link class="nav_link" to="/"><span class="nav_item-number" aria-hidden="true">00</span>Home</router-link>
@@ -21,6 +21,31 @@
                 </li>
                 <li class="nav_item">
                     <router-link class="nav_link" to="/technology"><span class="nav_item-number" aria-hidden="true">03</span>Technology</router-link>
+                </li>
+                <li class="nav_item">
+                    <router-link class="nav_link" to="/login"><span class="nav_item-number" aria-hidden="true">04</span>Login</router-link>
+                </li>
+                <li ref="underline" class="underline" tabindex="-1" aria-hidden="true"></li>
+            </ul>
+        </nav>
+        <nav v-else ref="nav" class="navigation">
+            <ul class="nav_list">
+                <li class="nav_item">
+                    <router-link class="nav_link" to="/dashboard"><span class="nav_item-number" aria-hidden="true">00</span>Dashboard</router-link>
+                </li>
+                <li class="nav_item">
+                    <router-link class="nav_link" to="/admin/destination"><span class="nav_item-number" aria-hidden="true">01</span>Destination</router-link>
+                </li>
+                <li class="nav_item">
+                    <router-link class="nav_link" to="/admin/crew"><span class="nav_item-number" aria-hidden="true">02</span>Crew</router-link>
+                </li>
+                <li class="nav_item">
+                    <router-link class="nav_link" to="/admin/technology"><span class="nav_item-number" aria-hidden="true">03</span>Technology</router-link>
+                </li>
+                <li class="nav_item">
+                    <form @submit.prevent="handleLogout">
+                        <button class="nav_link"><span class="nav_item-number" aria-hidden="true">04</span>Logout</button>
+                    </form>
                 </li>
                 <li ref="underline" class="underline" tabindex="-1" aria-hidden="true"></li>
             </ul>
@@ -36,15 +61,34 @@
 </template>
 
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import { useRoute } from 'vue-router';
+import {nextTick, onBeforeUnmount, onMounted, ref, watch} from "vue";
+import {useRoute} from 'vue-router';
+import {useAuthStore} from "../stores/auth";
+import axios from "axios";
+import router from "../router";
 
 const route = useRoute();
+const authStore = useAuthStore();
 
 const menu = ref(null);
 const nav = ref(null);
 const underline = ref(null);
 const navLinks = ref([]);
+
+const handleLogout = async () => {
+    try {
+        const response = await axios.post('/api/logout');
+
+        if (response.data.success) {
+            authStore.logout();
+            await router.push('/');
+        }
+    } catch (error) {
+        if (error.response) {
+            console.error('Logging out failed:', error.response.data.message);
+        }
+    }
+}
 
 function initializeEventListeners() {
     if (menu.value) {
@@ -140,7 +184,7 @@ const listeners = [];
 
 onMounted(async () => {
     await nextTick();
-    navLinks.value = Array.from(nav.value?.querySelectorAll('.nav_item') || []);
+    navLinks.value = Array.from(nav.value?.querySelectorAll('.nav_link') || []);
 
     initializeEventListeners();
     moveUnderlineOnLoad();

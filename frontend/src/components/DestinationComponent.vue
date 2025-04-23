@@ -58,7 +58,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const fetchDestinations = async() => {
     try {
-        const response = await axios.get(`${backendUrl}/api/destination`);
+        const response = await axios.get('/api/destination');
         destinations.value = response.data;
         selectDestination(0);
     } catch (error) {

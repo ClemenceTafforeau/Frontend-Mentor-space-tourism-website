@@ -1,18 +1,22 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CrewMemberController;
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\TechnologyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/dashboard', []);
+});
 
 Route::get('/destination', [DestinationController::class, 'index']);
-Route::get('/destination/{id}', []);
-
-Route::get('/crew', []);
-Route::get('/crew/{id}', []);
-
-Route::get('/technology', []);
-Route::get('/technology/{id}', []);
+Route::get('/crew', [CrewMemberController::class, 'index']);
+Route::get('/technology', [TechnologyController::class, 'index']);

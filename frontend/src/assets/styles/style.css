@@ -337,7 +337,12 @@ header {
         height: .1rem;
         background-color: var(--clr-neutral-light-transparency-25);
         left: 8.8rem;
-        width: clamp(39.8rem, 100vw + -88.2rem, 103.8rem);
+    }
+    .header-general::after {
+        width: clamp(32.8rem, 93.75vw + -87.2rem, 92.8rem);
+    }
+    .header-user::after {
+        width: clamp(25.8rem, 93.75vw + -94.2rem, 85.8rem);
     }
 }
 
@@ -647,7 +652,7 @@ header {
     background-size: cover;
 }
 
-.crew-body main {
+.crew-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -740,7 +745,7 @@ header {
         overflow-y: hidden;
     }
     
-    .crew-body main {
+    .crew-wrapper {
         display: grid;
         align-items: start;
         min-height: 100vh;
@@ -775,7 +780,7 @@ header {
     .crew-body {
         background-image: url(@/assets/img/background-crew-desktop.jpg);
     }
-    .crew-body main {
+    .crew-wrapper {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         justify-items: start;
@@ -810,7 +815,7 @@ header {
     background-size: cover;
 }
 
-.technology-body main {
+.technology-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -903,7 +908,7 @@ header {
     .technology-body {
         background-image: url(@/assets/img/background-technology-tablet.jpg);
     }
-    .technology-body main {
+    .technology-wrapper {
         gap: 4.8rem;
     }
     .technology-body main .h1-secondary {
@@ -922,7 +927,7 @@ header {
     .technology-body {
         background-image: url(@/assets/img/background-technology-desktop.jpg);
     }
-    .technology-body main {
+    .technology-wrapper {
         display: grid;
         grid-template-columns: min-content 1fr 1fr;
         grid-template-rows: repeat(4, max-content);
@@ -961,5 +966,103 @@ header {
         grid-column: 2 / 3;
         grid-row: 2 / 4;
         max-width: 50rem;
+    }
+}
+
+/** Login **/
+
+.login-body {
+    background-image: url(@/assets/img/background-home-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-body main {
+    margin-inline: var(--spacing-x);
+    margin-block-start: clamp(12rem, 8.3333vw + 9.3333rem, 20rem);
+    margin-block-end: clamp(4.8rem, 2.514rem + 11.429vw, 12.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+}
+
+.login-body form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    width: 25%;
+}
+
+.login-body .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-body button[type="submit"] {
+    background-color: var(--clr-neutral-light-transparency-25);
+    border-radius: 2.4rem;
+    width: fit-content;
+    padding-inline: 1.6rem;
+    padding-block: .8rem;
+}
+
+/*** Tablet ***/
+
+@media only screen and (min-width: 48em) {
+    .login-body {
+        background-image: url(@/assets/img/background-home-tablet.jpg);
+    }
+}
+
+/*** Desktop ***/
+
+@media only screen and (min-width: 80em) {
+    .login-body {
+        background-image: url(@/assets/img/background-home-desktop.jpg);
+    }
+
+    .login-body main {
+        flex-direction: row;
+        justify-content: space-between;
+        min-height: calc(80vh - 20rem);
+    }
+}
+
+/** Dashboard **/
+
+.dashboard-body {
+    background-image: url(@/assets/img/background-home-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.dashboard-body main {
+    margin-inline: var(--spacing-x);
+    margin-block-start: clamp(12rem, 8.3333vw + 9.3333rem, 20rem);
+    margin-block-end: clamp(4.8rem, 2.514rem + 11.429vw, 12.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+}
+
+/*** Tablet ***/
+
+@media only screen and (min-width: 48em) {
+    .dashboard-body {
+        background-image: url(@/assets/img/background-home-tablet.jpg);
+    }
+}
+
+/*** Desktop ***/
+
+@media only screen and (min-width: 80em) {
+    .dashboard-body {
+        background-image: url(@/assets/img/background-home-desktop.jpg);
+    }
+
+    .dashboard-body main {
+        flex-direction: row;
+        justify-content: space-between;
+        min-height: calc(80vh - 20rem);
     }
 }
