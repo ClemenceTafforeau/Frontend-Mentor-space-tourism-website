@@ -62,7 +62,6 @@ const handleDelete = async (id) => {
 }
 
 const handleEdit = (id) => {
-    console.log(id);
     router.push(`/admin/crew/${id}`);
 }
 

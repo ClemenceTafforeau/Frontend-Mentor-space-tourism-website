@@ -10,6 +10,8 @@ import AdminDestinationComponent from "../components/Admin/AdminDestinationCompo
 import AdminTechnologyComponent from "../components/Admin/AdminTechnologyComponent.vue";
 import AdminCrewCreateForm from "../components/Admin/Forms/AdminCrewCreateForm.vue";
 import AdminCrewEditForm from "../components/Admin/Forms/AdminCrewEditForm.vue";
+import AdminDestinationCreateForm from "../components/Admin/Forms/AdminDestinationCreateForm.vue";
+import AdminDestinationEditForm from "../components/Admin/Forms/AdminDestinationEditForm.vue";
 
 const routes = [
     { path: '/', component: HomeComponent, meta: { bodyClass: 'home-body', title: 'Home - Space travel website' }  },
@@ -22,6 +24,8 @@ const routes = [
     { path: '/admin/crew/create', component: AdminCrewCreateForm, meta: { bodyClass: 'admin-body', title: 'Create crew member - Space travel website' }  },
     { path: '/admin/crew/:id', component: AdminCrewEditForm, meta: { bodyClass: 'admin-body', title: 'Edit crew member - Space travel website' }  },
     { path: '/admin/destination', component: AdminDestinationComponent, meta: { bodyClass: 'admin-body', title: 'Destination dashboard - Space travel website' }  },
+    { path: '/admin/destination/create', component: AdminDestinationCreateForm, meta: { bodyClass: 'admin-body', title: 'Create destination - Space travel website' }  },
+    { path: '/admin/destination/:id', component: AdminDestinationEditForm, meta: { bodyClass: 'admin-body', title: 'Edit destination - Space travel website' }  },
     { path: '/admin/technology', component: AdminTechnologyComponent, meta: { bodyClass: 'admin-body', title: 'Technology dashboard - Space travel website' }  },
 ];
 
