@@ -17,6 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard', []);
     Route::apiResource('/admin/crew', CrewMemberController::class);
     Route::apiResource('/admin/destination', DestinationController::class);
+    Route::apiResource('/admin/technology', TechnologyController::class);
 });
 
 Route::get('/destination', [DestinationController::class, 'list']);
