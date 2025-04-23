@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
-            $table->string('picture_webp', 255);
-            $table->string('picture_png', 255);
+            $table->string('picture_webp', 255)->nullable();
+            $table->string('picture_png', 255)->nullable();
             $table->string('name');
             $table->text('description');
             $table->bigInteger('distance');
             $table->integer('ett');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

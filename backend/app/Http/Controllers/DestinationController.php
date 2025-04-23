@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DestinationController extends Controller
 {
-    public function index(): Collection
+    public function list(): Collection
     {
         $destinations = Destination::all();
 

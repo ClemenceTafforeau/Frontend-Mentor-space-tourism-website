@@ -15,8 +15,9 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/dashboard', []);
+    Route::apiResource('/admin/crew', CrewMemberController::class);
 });
 
-Route::get('/destination', [DestinationController::class, 'index']);
-Route::get('/crew', [CrewMemberController::class, 'index']);
-Route::get('/technology', [TechnologyController::class, 'index']);
+Route::get('/destination', [DestinationController::class, 'list']);
+Route::get('/crew', [CrewMemberController::class, 'list']);
+Route::get('/technology', [TechnologyController::class, 'list']);

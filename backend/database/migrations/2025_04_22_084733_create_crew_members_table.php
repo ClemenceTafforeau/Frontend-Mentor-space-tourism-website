@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('crew_members', function (Blueprint $table) {
             $table->id();
-            $table->string('picture_webp', 255);
-            $table->string('picture_png', 255);
+            $table->string('picture_webp', 255)->nullable();
+            $table->string('picture_png', 255)->nullable();
             $table->string('rank', 100);
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->text('biography')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

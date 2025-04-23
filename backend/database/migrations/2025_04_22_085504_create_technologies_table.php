@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
-            $table->string('picture_portrait');
-            $table->string('picture_landscape');
+            $table->string('picture_portrait')->nullable();
+            $table->string('picture_landscape')->nullable();
             $table->string('name');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

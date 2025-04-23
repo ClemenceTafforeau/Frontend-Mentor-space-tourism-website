@@ -36,6 +36,7 @@
     --clr-neutral-light-transparency-01: hsla(0, 0%, 100%, .1);
     --clr-neutral-light-transparency-25: hsla(0, 0%, 100%, .25);
     --clr-neutral-light-transparency-04: hsla(0, 0%, 100%, .04);
+    --clr-neutral-light-transparency-75: hsla(0, 0%, 100%, .75);
     --clr-primary-1: hsla(231, 77%, 90%, 1);
     --clr-primary-1-transparency-15: hsla(231, 77%, 90%, .15);
 
@@ -1065,4 +1066,161 @@ header {
         justify-content: space-between;
         min-height: calc(80vh - 20rem);
     }
+}
+
+/** Dashboards (crew, technologies, destinations) **/
+
+.admin-body {
+    background-image: url(@/assets/img/background-home-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.admin-body main {
+    margin-inline: var(--spacing-x);
+    margin-block-start: clamp(12rem, 8.3333vw + 9.3333rem, 20rem);
+    margin-block-end: clamp(4.8rem, 2.514rem + 11.429vw, 12.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+}
+
+/*** Tablet ***/
+
+@media only screen and (min-width: 48em) {
+    .admin-body  {
+        background-image: url(@/assets/img/background-home-tablet.jpg);
+    }
+}
+
+/*** Desktop ***/
+
+@media only screen and (min-width: 80em) {
+    .admin-body  {
+        background-image: url(@/assets/img/background-home-desktop.jpg);
+    }
+
+    .admin-body  main {
+        flex-direction: row;
+        justify-content: space-between;
+        min-height: calc(80vh - 20rem);
+    }
+}
+
+/* General container */
+.admin-body .container {
+    width: 100%;
+    padding: 2.4rem;
+    background-color: var(--clr-neutral-light-transparency-04);
+}
+
+/* Add entry button */
+.admin-body .add-btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.admin-body .add-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Table Styles */
+.admin-body .data-table {
+    width: 100%;
+    background-color: var(--clr-neutral-light-transparency-75);
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.admin-body .data-table th,
+.admin-body .data-table td {
+    padding: .8rem .8rem;
+    text-align: left;
+    border: .1rem solid var(--clr-neutral-light);
+}
+
+.admin-body .data-table th {
+    white-space: nowrap;
+    background-color: var(--clr-neutral-light);
+    font-weight: bold;
+    color: var(--clr-neutral-dark);
+}
+
+.admin-body .data-table td {
+    text-overflow: ellipsis;
+    font-size: 1.6rem;
+    color: var(--clr-neutral-dark);
+}
+
+.admin-body .data-table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Action buttons */
+.admin-body .btn-container {
+    display: flex;
+}
+
+.admin-body button:not(.nav_link, .submit-btn) {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.admin-body .edit-btn {
+    background-color: #f39c12;
+    color: white;
+}
+
+.admin-body .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    margin-left: 8px;
+}
+
+.admin-body button:hover {
+    opacity: 0.8;
+}
+
+.admin-body .edit-btn:hover {
+    background-color: #e67e22;
+}
+
+.admin-body .delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/** Forms (crew, technologies, destinations) **/
+
+.admin-body .entry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.admin-body .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+.admin-body .submit-btn {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    padding: .8rem 1.6rem;
+    color: var(--clr-neutral-light);
+    border-radius: 3.2rem;
+    background-color: var(--clr-neutral-light-transparency-25);
 }
