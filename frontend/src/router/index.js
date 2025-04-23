@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeComponent from '../components/HomeComponent.vue';
 import CrewComponent from '../components/CrewComponent.vue';
-import DestinationComponent from '../components/DestinationComponent.vue';
+import DestinationComponent from "../components/DestinationComponent.vue";
 import TechnologyComponent from '../components/TechnologyComponent.vue';
 
 const routes = [
@@ -12,7 +12,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(), // Uses HTML5 history mode (clean URLs)
+  history: createWebHistory(),
   routes,
 });
 

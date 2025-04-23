@@ -9,15 +9,6 @@ export default defineConfig({
       launchEditor: 'code'
     }),
   ],
-  build: {
-    rollupOptions: {
-      input: {
-        crew: 'public/crew.html',
-        destination: 'public/destination.html',
-        technology: 'public/technology.html',
-      },
-    },
-  },
   css: {
     preprocessorOptions: {
       css: {
@@ -38,4 +29,13 @@ export default defineConfig({
       },
     },
   },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
+      },
+    },
+  }
 });

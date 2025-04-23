@@ -1,173 +1,134 @@
 <template>
-    <h1 class="h1-secondary">
-        <span aria-hidden="true">01</span>
-        <span>Pick your destination</span>
-    </h1>
-    <transition name="fade" mode="out-in">
-        <div class="destination-img" :key="selectedDestination.name">
-            <img  
-                :src="selectedDestination.picture" 
-                :alt="selectedDestination.name" 
-            />
-        </div>
-    </transition>
-    <ul class="destination_list">
-        <li class="destination_item" v-for="(destination, index) in destinations" :key="index" @click="selectDestination(index)" :class="{ 'destination-active': selectedDestinationIndex === index }">
-            <button class="destination_link">{{ destination.name }}</button>
-        </li>
-        <li class="destination-underline" tabindex="-1" aria-hidden="true"></li>
-    </ul>
+    <div class="destination-wrapper" v-if="destinations.length > 0">
+        <h1 class="h1-secondary">
+            <span aria-hidden="true">01</span>
+            <span>Pick your destination</span>
+        </h1>
+        <transition name="fade" mode="out-in">
+            <div class="destination-img" :key="selectedDestination.name">
+                <img
+                    :src="backendUrl + '/storage/img/' + selectedDestination.picture_webp"
+                    :alt="selectedDestination.name"
+                />
+            </div>
+        </transition>
+        <ul class="destination_list">
+            <li ref="destinationLinks" class="destination_item" v-for="(destination, index) in destinations" :key="destination.name" :class="{ 'destination-active': selectedDestinationIndex === index }">
+                <button @click="selectDestination(index)" class="destination_link">{{ destination.name }}</button>
+            </li>
+            <li ref="destinationUnderline" class="destination-underline" tabindex="-1" aria-hidden="true"></li>
+        </ul>
 
-    <section class="destination-section">
-        <div class="destination-choice">
-            <transition name="fade" mode="out-in">
-                <div class="destination-name-desc" :key="selectedDestination.name">
-                    <h2 class="h2-destination">{{ selectedDestination.name }}</h2>
-                    <p>{{ selectedDestination.description }}</p>    
-                </div>
-            </transition>
-            <hr>
-            <div class="destination-info-container">
-                <div class="destination-info">
-                    <h3>Avg. distance</h3>
-                    <transition name="fade" mode="out-in">
-                        <p :key="selectedDestination.name">{{ selectedDestination.distance }}</p>
-                    </transition>
-                </div>
-                <div class="destination-info">
-                    <h3>Est. travel time</h3>
-                    <transition name="fade" mode="out-in">
-                        <p :key="selectedDestination.name">{{ selectedDestination.ett }}</p>
-                    </transition>
+        <section class="destination-section">
+            <div class="destination-choice">
+                <transition name="fade" mode="out-in">
+                    <div class="destination-name-desc" :key="selectedDestination.name">
+                        <h2 class="h2-destination">{{ selectedDestination.name }}</h2>
+                        <p>{{ selectedDestination.description }}</p>
+                    </div>
+                </transition>
+                <hr>
+                <div class="destination-info-container">
+                    <div class="destination-info">
+                        <h3>Avg. distance</h3>
+                        <transition name="fade" mode="out-in">
+                            <p :key="selectedDestination.name">{{ formatDistance(selectedDestination.distance) }}</p>
+                        </transition>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Est. travel time</h3>
+                        <transition name="fade" mode="out-in">
+                            <p :key="selectedDestination.name">{{ formatDays(selectedDestination.ett) }}</p>
+                        </transition>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </template>
 
-<script>
-    import imageMoon from '@/assets/img/image-moon.webp';
-    import imageMars from '@/assets/img/image-mars.webp';
-    import imageEuropa from '@/assets/img/image-europa.webp';
-    import imageTitan from '@/assets/img/image-titan.webp';
+<script setup>
+import axios from "axios";
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { formatDistance, formatDays } from "../helpers/formatData";
 
-    export default {
-        data() {
-            return {
-                selectedDestination: {},
-                selectedDestinationIndex: 0,
-                destinations: [
-                    { picture: imageMoon, name: 'Moon', description: 'See our planet as you’ve never seen it before. A perfect relaxing trip away to help regain perspective and come back refreshed. While you’re there, take in some history by visiting the Luna 2 and Apollo 11 landing sites.', distance: '384,400 km', ett: '3 days' },
-                    { picture: imageMars, name: 'Mars', description: 'Don’t forget to pack your hiking boots. You’ll need them to tackle Olympus Mons, the tallest planetary mountain in our solar system. It’s two and a half times the size of Everest!', distance: '225 mil. km', ett: '9 months' },
-                    { picture: imageEuropa, name: 'Europa', description: 'The smallest of the four Galilean moons orbiting Jupiter, Europa is a winter lover’s dream. With an icy surface, it’s perfect for a bit of ice skating, curling, hockey, or simple relaxation in your snug wintery cabin.', distance: '628 mil. km', ett: '3 years' },
-                    { picture: imageTitan, name: 'Titan', description: 'The only moon known to have a dense atmosphere other than Earth, Titan is a home away from home (just a few hundred degrees colder!). As a bonus, you get striking views of the Rings of Saturn.', distance: '1.6 bil. km', ett: '7 years' },
-                ],
-            };
-        },
-        created() {
-            this.selectedDestination = this.destinations[0];
-        },
-        mounted() {
-            this.initializeDestinationEventListeners();
-            this.moveDestinationUnderlineOnLoad();
-        },
-        beforeDestroy() {
-            this.cleanupDestinationEventListeners();
-        },
-        methods: {
-            initializeDestinationEventListeners() {
-                const destinationLinks = document.querySelectorAll('.destination_item');
-                const destinationUnderline = document.querySelector('.destination-underline');
+const destinations = ref([]);
 
-                // Ensure underline moves to the element with .destination-active on load
-                window.addEventListener('DOMContentLoaded', () => {
-                    let activeDestinationLink = document.querySelector('.destination-active');
-                    
-                    // Move underline to the active element
-                    if (activeDestinationLink) {
-                        this.moveDestinationUnderline(activeDestinationLink, destinationUnderline);
-                    }
-                });
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-                destinationLinks.forEach(destinationLink => {
-                    destinationLink.addEventListener('mouseover', () => {
-                        // Add hover class and move the underline
-                        destinationLinks.forEach(link => link.classList.remove('destination-hover')); // Remove hover class from all
-                        destinationLink.classList.add('destination-hover'); // Add hover class to the current link
-                        this.moveDestinationUnderline(destinationLink, destinationUnderline);
-                    });
+const fetchDestinations = async() => {
+    try {
+        const response = await axios.get(`${backendUrl}/api/destination`);
+        destinations.value = response.data;
+        selectDestination(0);
+    } catch (error) {
+        console.error('Error fetching destinations.', error);
+    }
+}
 
-                    destinationLink.firstElementChild.addEventListener('focus', () => {
-                        // Move underline on focus
-                        this.moveDestinationUnderline(destinationLink, destinationUnderline);
-                    });
+const selectedDestination = ref(destinations.value[0]);
+const selectedDestinationIndex = ref(0);
 
-                    destinationLink.addEventListener('mouseout', () => {
-                        // Remove hover class when mouse leaves
-                        destinationLink.classList.remove('destination-hover'); // Remove hover class
-                        const activeDestinationLink = document.querySelector('.destination-active');
-                        if (activeDestinationLink) {
-                            this.moveDestinationUnderline(activeDestinationLink, destinationUnderline);
-                        }
-                    });
+const destinationLinks = ref([]);
+const destinationUnderline = ref(null);
 
-                    destinationLink.firstElementChild.addEventListener('blur', () => {
-                        // Remove hover class when mouse leaves
-                        destinationLink.classList.remove('destination-hover'); // Remove hover class
-                        const activeDestinationLink = document.querySelector('.destination-active');
-                        if (activeDestinationLink) {
-                            this.moveDestinationUnderline(activeDestinationLink, destinationUnderline);
-                        }
-                    });
+function selectDestination(index) {
+    selectedDestination.value = destinations.value[index];
+    selectedDestinationIndex.value = index;
+}
 
-                    destinationLink.addEventListener('click', () => {
-                        // Remove active class from all links
-                        destinationLinks.forEach(link => {
-                            link.classList.remove('destination-active');
-                            link.classList.remove('destination-hover'); // Remove hover class if active link is clicked
-                        });
-                        // Add active class to the clicked link
-                        destinationLink.classList.add('destination-active');
-                        // Move the underline
-                        this.moveDestinationUnderline(destinationLink, destinationUnderline);
-                    });
-                });
-            },
-            cleanupDestinationEventListeners() {
-                const destinationLinks = document.querySelectorAll('.destination_item');
-                window.removeEventListener('DOMContentLoaded', this.moveDestinationUnderline);
+function moveDestinationUnderline(destinationLink) {
+    const linkRect = destinationLink.getBoundingClientRect();
+    const navRect = destinationLink.closest('ul').getBoundingClientRect();
 
-                destinationLinks.forEach(destinationLink => {
-                    destinationLink.removeEventListener('mouseover', this.moveDestinationUnderline);
-                    destinationLink.removeEventListener('focus', this.moveDestinationUnderline);
-                    destinationLink.removeEventListener('mouseout', this.moveDestinationUnderline);
-                    destinationLink.removeEventListener('click', this.moveDestinationUnderline);
-                });
-            },
-            moveDestinationUnderlineOnLoad() {
-                const firstDestinationLink = document.querySelector('.destination_item');
-                const destinationUnderline = document.querySelector('.destination-underline');
-                if (firstDestinationLink) {
-                    this.moveDestinationUnderline(firstDestinationLink, destinationUnderline);
-                }
-            },
-            moveDestinationUnderline(destinationLink, destinationUnderline) {
-                const destinationLinkRect = destinationLink.getBoundingClientRect();
-                const destinationNavRect = destinationLink.closest('ul').getBoundingClientRect();
+    if (destinationUnderline.value) {
+        destinationUnderline.value.style.width = `${linkRect.width}px`;
+        destinationUnderline.value.style.left = `${linkRect.left - navRect.left}px`;
+    }
+}
 
-                // Move the underline to the selected link
-                destinationUnderline.style.width = `${destinationLinkRect.width}px`;
-                destinationUnderline.style.left = `${destinationLinkRect.left - destinationNavRect.left}px`;
+function resetUnderline() {
+    const activeLink = destinationLinks.value[selectedDestinationIndex.value];
+    if (activeLink) moveDestinationUnderline(activeLink);
+}
 
-                // Add .destination-active class to the current link
-                destinationLink.classList.add('destination-hover');
-            },
-            selectDestination(index) {
-                this.selectedDestination = this.destinations[index];
-                this.selectedDestinationIndex = index;
-            },
-        },
-    };
+function setupEventListeners() {
+    destinationLinks.value.forEach((link, index) => {
+        link.addEventListener('mouseover', () => {
+            destinationLinks.value.forEach(l => l.classList.remove('destination-hover'));
+            link.classList.add('destination-hover');
+            moveDestinationUnderline(link);
+        });
+
+        link.addEventListener('mouseout', resetUnderline);
+
+        link.addEventListener('click', () => {
+            destinationLinks.value.forEach(l => l.classList.remove('destination-active', 'destination-hover'));
+            link.classList.add('destination-active');
+            selectDestination(index);
+            moveDestinationUnderline(link);
+        });
+
+        link.firstElementChild?.addEventListener('focus', () => moveDestinationUnderline(link));
+        link.firstElementChild?.addEventListener('blur', resetUnderline);
+    });
+}
+
+function cleanupEventListeners() {
+    destinationLinks.value.forEach(link => {
+        link.replaceWith(link.cloneNode(true)); // Easiest way to strip all listeners
+    });
+}
+
+onMounted(async() => {
+    await fetchDestinations();
+    resetUnderline();
+    setupEventListeners();
+});
+
+onBeforeUnmount(() => {
+    cleanupEventListeners();
+});
 </script>
 
 <style src="@/assets/styles/helpers.css"></style>

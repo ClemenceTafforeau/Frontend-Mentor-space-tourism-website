@@ -100,7 +100,7 @@ a, button {
 .h1-secondary {
     font-family: var(--ff-subtitles);
     font-size: var(--h1-secondary-fs);
-    line-height: var(--h1-secondary-lhh);
+    line-height: var(--h1-secondary-lh);
     letter-spacing: var(--subheading-3-spacing);
     color: var(--clr-neutral-light);
     text-transform: uppercase;
@@ -476,7 +476,7 @@ header {
     background-size: cover;
 }
 
-.destination-body main {
+.destination-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -588,7 +588,7 @@ header {
         background-image: url(@/assets/img/background-destination-tablet.jpg);
     }
     
-    .destination-body main {
+    .destination-wrapper {
         align-items: start;
     }
 
@@ -608,7 +608,7 @@ header {
     .destination-body {
         background-image: url(@/assets/img/background-destination-desktop.jpg);
     }
-    .destination-body main {
+    .destination-wrapper{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         justify-items: start;
