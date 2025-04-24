@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     /**
+     * @return JsonResponse
      * Handle an authentication attempt
      */
 
@@ -33,6 +34,11 @@ class AuthController extends Controller
             'message' => 'The provided credentials do not match our records.',
         ], 401);
     }
+
+    /**
+     * @return JsonResponse
+     * Revoke the current access token and log the user out
+     */
 
     public function logout(Request $request): JsonResponse
     {
