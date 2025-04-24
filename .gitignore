@@ -38,9 +38,11 @@ Thumbs.db
 
 # Node modules
 /frontend/node_modules
+/node_modules
 
 # Vendor
 /backend/vendor
+/vendor
 
 # Compiled Laravel files
 /backend/storage
