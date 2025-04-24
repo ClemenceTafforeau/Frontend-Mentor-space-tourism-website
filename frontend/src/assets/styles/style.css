@@ -343,7 +343,7 @@ header {
         width: clamp(32.8rem, 93.75vw + -87.2rem, 92.8rem);
     }
     .header-user::after {
-        width: clamp(25.8rem, 93.75vw + -94.2rem, 85.8rem);
+        width: clamp(5.8rem, 93.75vw + -114.2rem, 65.8rem);
     }
 }
 

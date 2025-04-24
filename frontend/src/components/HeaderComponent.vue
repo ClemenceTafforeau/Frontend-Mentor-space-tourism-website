@@ -34,17 +34,20 @@
                     <router-link class="nav_link" to="/dashboard"><span class="nav_item-number" aria-hidden="true">00</span>Dashboard</router-link>
                 </li>
                 <li class="nav_item">
-                    <router-link class="nav_link" to="/admin/destination"><span class="nav_item-number" aria-hidden="true">01</span>Destination</router-link>
+                    <router-link class="nav_link" to="/admin/destination"><span class="nav_item-number" aria-hidden="true">01</span>Destinations</router-link>
                 </li>
                 <li class="nav_item">
                     <router-link class="nav_link" to="/admin/crew"><span class="nav_item-number" aria-hidden="true">02</span>Crew</router-link>
                 </li>
                 <li class="nav_item">
-                    <router-link class="nav_link" to="/admin/technology"><span class="nav_item-number" aria-hidden="true">03</span>Technology</router-link>
+                    <router-link class="nav_link" to="/admin/technology"><span class="nav_item-number" aria-hidden="true">03</span>Technologies</router-link>
+                </li>
+                <li class="nav_item">
+                    <router-link class="nav_link" to="/admin/user"><span class="nav_item-number" aria-hidden="true">04</span>Users</router-link>
                 </li>
                 <li class="nav_item">
                     <form @submit.prevent="handleLogout">
-                        <button class="nav_link"><span class="nav_item-number" aria-hidden="true">04</span>Logout</button>
+                        <button class="nav_link"><span class="nav_item-number" aria-hidden="true">05</span>Logout</button>
                     </form>
                 </li>
                 <li ref="underline" class="underline" tabindex="-1" aria-hidden="true"></li>
