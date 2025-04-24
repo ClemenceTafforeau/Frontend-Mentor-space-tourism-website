@@ -15,9 +15,27 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         foreach (RoleEnum::cases() as $role) {
-            User::factory()->create([
-                'role' => $role->value
-            ]);
+            $userData = match ($role) {
+                RoleEnum::ADMIN => [
+                    'first_name' => 'Admin',
+                    'last_name' => 'User',
+                    'email' => 'admin@admin.com',
+                ],
+                RoleEnum::TRAVEL_AGENT => [
+                    'first_name' => 'Travel',
+                    'last_name' => 'Agent',
+                    'email' => 'travel@agent.com',
+                ],
+                RoleEnum::USER => [
+                    'first_name' => 'Regular',
+                    'last_name' => 'User',
+                    'email' => 'user@user.com',
+                ],
+            };
+
+            User::factory()->create(array_merge([
+                'role' => $role->value,
+            ], $userData));
         }
     }
 }

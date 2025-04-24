@@ -17,8 +17,6 @@ class CrewMemberController extends Controller
      *
      * @group Crew Members
      *
-     * @authenticated
-     *
      * @response 200 [
      *   {
      *      "id": "1"

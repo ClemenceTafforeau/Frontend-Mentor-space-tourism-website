@@ -1,20 +1,18 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\UserController as AuthUserController;
 use App\Http\Controllers\CrewMemberController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    Route::get('/user', [AuthUserController::class, 'show']);
     Route::get('/admin/roles', [RoleController::class, 'getRoles']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
